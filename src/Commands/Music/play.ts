@@ -27,7 +27,6 @@ export default class PlayCommand extends BaseCommand {
       const query = interaction.options.getString('recherche', true);
 
       const res = await this.client.manager.search(query);
-      console.log("🚀 ~ file: play.ts ~ line 30 ~ PlayCommand ~ run ~ res", res)
 
       switch(res.loadType) {
 
