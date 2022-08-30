@@ -9,10 +9,7 @@ export default class InteractionCreate extends BaseEvent {
 
 	run (interaction: Interaction): void {
 		if (interaction.isCommand()) {
-
-			const player = this.client.manager.players.get((interaction.guildId as string));
-
-			this.client.emit('commandInteractionCreate', (interaction as ChatInputCommandInteraction), player);
+			this.client.emit('commandInteractionCreate', (interaction as ChatInputCommandInteraction));
 		}
 
 		if (interaction.isAutocomplete()) {

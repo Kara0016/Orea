@@ -1,5 +1,5 @@
 # Oréa music bot
-Discord Bot template using discord.js
+Discord music bot using vulkava Lavalink wrapper
 
 ## Work in progress...
 

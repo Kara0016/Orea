@@ -25,7 +25,12 @@ export default class CommandInteractionCreate extends BaseEvent {
 					ephemeral: true
 				});
 			}
+			
+			
 		}
-		return cmd.run(interaction);
+		
+		const player = this.client.manager.players.get((interaction.guildId as string));
+		
+		return cmd.run(interaction, player);
 	}
 }
