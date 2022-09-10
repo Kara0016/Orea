@@ -30,6 +30,7 @@ export class ExtendedClient extends Client {
 		}
 	}
 
+	/* eslint @typescript-eslint/no-var-requires: "off" */
 	private async handler (type : BotHandlerType): Promise<void> {
 		const dirs = await ExtendedClient.getDirs(type);
 		if (!dirs || !dirs.length) return;
