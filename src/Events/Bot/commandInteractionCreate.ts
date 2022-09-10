@@ -1,10 +1,13 @@
 import { ExtendedClient } from '../../Classes/ExtendedClient';
 import { BaseEvent } from '../../Classes/Event';
 import { ChatInputCommandInteraction, Guild, GuildMember, PermissionsString, TextChannel } from 'discord.js';
+import { EventEmitters } from '../../Types/globals';
 
 export default class CommandInteractionCreate extends BaseEvent {
 	constructor (client: ExtendedClient) {
-		super(client);
+		super(client, {
+			emitter: EventEmitters.Client
+		});
 	}
 
 	async run (interaction: ChatInputCommandInteraction) {

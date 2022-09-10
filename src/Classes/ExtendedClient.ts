@@ -1,7 +1,7 @@
 import { Application, Client, Collection } from 'discord.js';
 import { Config } from '../Types/config';
 import { readdir } from 'fs/promises';
-import { BotHandlerType } from '../Types/globals';
+import { BotHandlerType, EventEmitters } from '../Types/globals';
 import { BaseCommand } from './Command';
 import { BaseEvent } from './Event';
 import { REST } from '@discordjs/rest';
@@ -62,7 +62,21 @@ export class ExtendedClient extends Client {
 
 	private async loadEvent (event: BaseEvent, filename: string) {
 		console.log(`${event.constructor.name} event loaded. 👌`);
-		this.on(filename.split('.')[0], event.run.bind(event));
+		const eventName = filename.split('.')[0];
+		switch(event.emitter) {
+		default:
+			return new Error(`No emitter provided on ${eventName} event.`);
+
+		case EventEmitters.Client:
+			return this.on(eventName, event.run.bind(event));
+
+		case EventEmitters.Manager:
+			// @ts-ignore TODO fix vulkava problem
+			return this.manager.on(eventName, event.run.bind(event));
+
+		case EventEmitters.Process:
+			return process.on(eventName, event.run.bind(event));
+		}
 	}
 
 	private async deployCommands () {

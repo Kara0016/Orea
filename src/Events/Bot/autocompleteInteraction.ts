@@ -1,10 +1,13 @@
 import { AutocompleteInteraction } from 'discord.js';
 import { BaseEvent } from '../../Classes/Event';
 import { ExtendedClient } from '../../Classes/ExtendedClient';
+import { EventEmitters } from '../../Types/globals';
 
 export default class AutocompleteInteractionEvent extends BaseEvent {
 	constructor (client: ExtendedClient) {
-		super(client);
+		super(client, {
+			emitter: EventEmitters.Client
+		});
 	}
 
 	async run (interaction: AutocompleteInteraction): Promise<void> {

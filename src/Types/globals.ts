@@ -29,3 +29,13 @@ export type ExtendedRESTPostAPIApplicationCommandsJSONBody = RESTPostAPIApplicat
 	default_member_permissions?: string
 	dm_permission?: boolean
 }
+
+export const enum EventEmitters {
+	Client,
+	Manager,
+	Process,
+} 
+
+export interface EventOptions {
+	emitter: EventEmitters
+}
