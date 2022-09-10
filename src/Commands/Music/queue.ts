@@ -177,7 +177,7 @@ export default class QueueCommand extends BaseCommand {
  * It takes an array and returns an array of arrays, each of which is no longer than the specified
  * size
  * @param {(Track|UnresolvedTrack)[]} arr - The array to be chunked
- * @param {number} - The size of each chunk.
+ * @param {number} size - The size of each chunk.
  * @returns An array of arrays.
  */
 	chunkArray (arr: (Track | UnresolvedTrack)[], size = 10) {

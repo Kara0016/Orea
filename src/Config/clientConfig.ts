@@ -3,7 +3,6 @@ import { Config } from '../Types/config';
 export const clientConfig: Config = {
 	'intents': [
 		'Guilds',
-		'DirectMessages',
 		'GuildVoiceStates'
 	],
 	'deployCommands': true,

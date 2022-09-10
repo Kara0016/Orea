@@ -1,5 +1,5 @@
 import { ClientOptions } from 'discord.js';
 
-export interface Config extends ClientOptions {
+export type Config = ClientOptions & {
     deployCommands: boolean
 }
