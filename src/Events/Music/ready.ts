@@ -1,12 +1,12 @@
-import { BaseEvent } from "../../Classes/Event";
-import { ExtendedClient } from "../../Classes/ExtendedClient";
+import { BaseEvent } from '../../Classes/Event';
+import { ExtendedClient } from '../../Classes/ExtendedClient';
 
 export default class ManagerReadyEvent extends BaseEvent {
-  constructor(client: ExtendedClient) {
-    super(client);
-  }
+	constructor (client: ExtendedClient) {
+		super(client);
+	}
 
-  run(): void {
-      console.log('Music deployed !')
-  }
+	run (): void {
+		console.log('Music deployed !');
+	}
 }

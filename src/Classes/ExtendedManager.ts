@@ -1,13 +1,13 @@
-import { Vulkava } from "vulkava";
-import { ExtendedClient } from "./ExtendedClient";
-import { nodes } from "../Config/nodes";
+import { Vulkava } from 'vulkava';
+import { ExtendedClient } from './ExtendedClient';
+import { nodes } from '../Config/nodes';
 
 /**
  * @constructor {ExtendedClient} client
  */
 
 export default class ExtendedManager extends Vulkava {
-	constructor(client: ExtendedClient) {
+	constructor (client: ExtendedClient) {
 		/**
 		 * @super {VulkavaOptions} options
 		 * @param {NodeOptions[]} options.nodes
@@ -18,10 +18,10 @@ export default class ExtendedManager extends Vulkava {
 
 		super({
 			nodes: nodes,
-      sendWS(guildId, payload) {
+			sendWS (guildId, payload) {
 				client.guilds.cache.get(guildId)?.shard.send(payload);
 			},
-			defaultSearchSource: "youtubemusic",
+			defaultSearchSource: 'youtubemusic',
 			spotify: {
 				clientId: process.env.SPOTIFY_ID,
 				clientSecret: process.env.SPOTIFY_SECRET,
@@ -32,7 +32,7 @@ export default class ExtendedManager extends Vulkava {
 	/**
 	 * @param {string} id - The id of the client instance.
 	 */
-	public init(id: string) {
+	public init (id: string) {
 		super.start(id);
 	}
 }

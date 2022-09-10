@@ -13,7 +13,7 @@ export default class InteractionCreate extends BaseEvent {
 		}
 
 		if (interaction.isAutocomplete()) {
-			this.client.emit('autocompleteInteraction', (interaction as AutocompleteInteraction))
+			this.client.emit('autocompleteInteraction', (interaction as AutocompleteInteraction));
 		}
 	}
 }

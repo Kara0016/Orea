@@ -41,7 +41,7 @@ export abstract class BaseCommand {
 		}
 
 		if (options) {
-			this.applicationCommandBody['options'] = options
+			this.applicationCommandBody['options'] = options;
 		}
 	}
 	abstract run (interaction: ChatInputCommandInteraction, player?: Player) : void;
