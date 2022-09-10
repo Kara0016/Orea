@@ -31,6 +31,9 @@ export default class CommandInteractionCreate extends BaseEvent {
 		
 		const player = this.client.manager.players.get((interaction.guildId as string));
 		
-		return cmd.run(interaction, player);
+		return cmd.run({
+			interaction: interaction,
+			player: player
+		});
 	}
 }

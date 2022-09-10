@@ -1,8 +1,7 @@
-import { Player } from 'vulkava';
-import { ChatInputCommandInteraction, PermissionsBitField, PermissionsString } from 'discord.js';
+import { PermissionsBitField, PermissionsString } from 'discord.js';
 import { sep } from 'path';
 import { ExtendedClient } from './ExtendedClient';
-import { CommandConf, CommandOptions, ExtendedRESTPostAPIApplicationCommandsJSONBody } from '../Types/globals';
+import { CommandConf, CommandData, CommandOptions, ExtendedRESTPostAPIApplicationCommandsJSONBody } from '../Types/globals';
 
 export abstract class BaseCommand {
 	protected client: ExtendedClient;
@@ -44,5 +43,5 @@ export abstract class BaseCommand {
 			this.applicationCommandBody['options'] = options;
 		}
 	}
-	abstract run (interaction: ChatInputCommandInteraction, player?: Player) : void;
+	abstract run (data: CommandData) : void;
 }

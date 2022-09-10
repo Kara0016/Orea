@@ -1,7 +1,6 @@
-import { ChatInputCommandInteraction, CacheType } from 'discord.js';
-import { Player } from 'vulkava';
 import { BaseCommand } from '../../Classes/Command';
 import { ExtendedClient } from '../../Classes/ExtendedClient';
+import { CommandData } from '../../Types/globals';
 
 export default class StopCommand extends BaseCommand {
 	constructor (client: ExtendedClient) {
@@ -15,7 +14,7 @@ export default class StopCommand extends BaseCommand {
 		});
 	}
 
-	async run (interaction: ChatInputCommandInteraction<CacheType>, player: Player): Promise<void> {
+	async run ({ interaction, player }: CommandData): Promise<void> {
 		if(!player) {
 			interaction.reply({
 				embeds: [{

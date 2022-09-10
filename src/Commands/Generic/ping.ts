@@ -1,6 +1,6 @@
 import { BaseCommand } from '../../Classes/Command';
 import { ExtendedClient } from '../../Classes/ExtendedClient';
-import { CommandInteraction } from 'discord.js';
+import { CommandData } from '../../Types/globals';
 
 export default class Ping extends BaseCommand {
 	constructor (client: ExtendedClient) {
@@ -11,7 +11,7 @@ export default class Ping extends BaseCommand {
 		});
 	}
 
-	async run (interaction: CommandInteraction) {
+	async run ({ interaction }: CommandData) {
 		await interaction.reply('Pong!');
 	}
 }

@@ -1,6 +1,7 @@
-import { ApplicationCommandOptionType, CacheType, ChatInputCommandInteraction, GuildMember } from 'discord.js';
+import { ApplicationCommandOptionType, GuildMember } from 'discord.js';
 import { BaseCommand } from '../../Classes/Command';
 import { ExtendedClient } from '../../Classes/ExtendedClient';
+import { CommandData } from '../../Types/globals';
 
 export default class PlayCommand extends BaseCommand {
 	constructor (client: ExtendedClient) {
@@ -23,7 +24,7 @@ export default class PlayCommand extends BaseCommand {
 		});
 	}
 
-	async run (interaction: ChatInputCommandInteraction<CacheType>): Promise<void> {
+	async run ({ interaction }: CommandData): Promise<void> {
 		const query = interaction.options.getString('recherche', true);
 
 		const { loadType, tracks, playlistInfo } = await this.client.manager.search(query);
