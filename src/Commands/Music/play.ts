@@ -26,9 +26,9 @@ export default class PlayCommand extends BaseCommand {
   async run(interaction: ChatInputCommandInteraction<CacheType>): Promise<void> {
       const query = interaction.options.getString('recherche', true);
 
-      const res = await this.client.manager.search(query);
+      const { loadType, tracks, playlistInfo } = await this.client.manager.search(query);
 
-      switch(res.loadType) {
+      switch(loadType) {
 
         case 'LOAD_FAILED': {
           interaction.reply({
@@ -42,7 +42,7 @@ export default class PlayCommand extends BaseCommand {
 
         case 'TRACK_LOADED':
         case 'SEARCH_RESULT': {
-          const track = res.tracks[0];
+          const track = tracks[0];
           
           let player = this.client.manager.players.get((interaction.guildId as string));
 
@@ -106,7 +106,7 @@ export default class PlayCommand extends BaseCommand {
           if(player.queue.size <= 0 && !player.current) {
             
             // Add all tracks to the queue
-            res.tracks.forEach((track) => {
+            tracks.forEach((track) => {
               player?.queue.add(track);
             })
 
@@ -118,7 +118,7 @@ export default class PlayCommand extends BaseCommand {
           } else {
 
 						// Add all tracks to the queue
-						res.tracks.forEach((track) => {
+						tracks.forEach((track) => {
 							player?.queue.add(track);
 						});
 					}
@@ -130,11 +130,11 @@ export default class PlayCommand extends BaseCommand {
 								fields: [
 									{
 										name: "Titre",
-										value: res.playlistInfo.name,
+										value: playlistInfo.name,
 									},
 									{
 										name: "Musiques",
-										value: res.tracks.length.toString(),
+										value: tracks.length.toString(),
 									},
 								],
 							},
