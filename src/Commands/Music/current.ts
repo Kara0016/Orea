@@ -54,7 +54,7 @@ export default class CurrentCommand extends BaseCommand {
 				},
 				fields: [
 					{ name: 'Author', value: `${current?.author}`, inline: true },
-					{ name: 'Duration', value: `${current?.duration}`, inline: true }
+					{ name: 'Duration', value: `${this.format(current?.duration)}`, inline: true }
 				],
 				footer: {
 					text: `${current?.source}`,
@@ -73,5 +73,34 @@ export default class CurrentCommand extends BaseCommand {
 			}],
 			ephemeral: isPrivate === 'yes' ? true : false
 		});
+	}
+
+	format (millis: number | undefined) {
+		if (typeof millis === 'undefined') {
+			return 'Unknown';
+		}
+		try {
+			const hours = Math.floor(millis / 3600000),
+				minutes = Math.floor(millis / 60000),
+				seconds = ((millis % 60000) / 1000);
+			if (hours < 1)
+				return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds + ' | ' + Math.floor(millis / 1000) + ' seconds';
+			else
+				return (
+					(hours < 10 ? '0' : '') +
+					hours +
+					':' +
+					(minutes < 10 ? '0' : '') +
+					minutes +
+					':' +
+					(seconds < 10 ? '0' : '') +
+					seconds +
+					' | ' +
+					Math.floor(millis / 1000) +
+					' seconds'
+				);
+		} catch (e) {
+			console.log(String(e));
+		}
 	}
 }
