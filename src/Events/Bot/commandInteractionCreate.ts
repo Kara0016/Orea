@@ -34,6 +34,36 @@ export default class CommandInteractionCreate extends BaseEvent {
 		
 		const player = this.client.manager.players.get((interaction.guildId as string));
 		
+		if(!(interaction.member as GuildMember).voice.channelId) {
+			interaction.reply({
+				embeds: [{
+					description: '❌ | **You need to join a vocal channel to use this command...**'
+				}]
+			});
+			return;
+		}
+
+		if(interaction.commandName !== 'play') {
+			if (!player) {
+				interaction.reply({
+					embeds: [{
+						description: '❌ | **Nothing is playing right now...**'
+					}]
+				});
+				return;
+			}
+
+
+			if((interaction.member as GuildMember).voice.channelId !== interaction.guild?.members.me?.voice.channelId) {
+				interaction.reply({
+					embeds: [{
+						description: '❌ | **You must be in the same channel as me...**'
+					}]
+				});
+				return;
+			}
+		}
+		
 		return cmd.run({
 			interaction: interaction,
 			player: player

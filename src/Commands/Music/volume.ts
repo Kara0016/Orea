@@ -24,15 +24,6 @@ export default class VolumeCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if (!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
-
 		const value = interaction.options.getNumber('pourcentage', true);
 
 		if(value > 150) {
@@ -44,7 +35,7 @@ export default class VolumeCommand extends BaseCommand {
 			return;
 		}
 
-		player.filters.setVolume(value, true);
+		player?.filters.setVolume(value, true);
 
 		interaction.reply({
 			embeds: [{

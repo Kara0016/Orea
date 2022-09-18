@@ -15,20 +15,11 @@ export default class VolumeCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if (!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
-
-		player.pause(!player.paused);
+		player?.pause(!player.paused);
 
 		interaction.reply({
 			embeds: [{
-				description: `Track ${player.paused ? 'paused' : 'resumed'}.`
+				description: `Track ${player?.paused ? 'paused' : 'resumed'}.`
 			}]
 		});
 	}

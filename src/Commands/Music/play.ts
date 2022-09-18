@@ -7,15 +7,15 @@ export default class PlayCommand extends BaseCommand {
 	constructor (client: ExtendedClient) {
 		super(client, {
 			filename: __filename,
-			description: 'Permet de lancer une musique sur le serveur.',
+			description: 'Play a music to the server.',
 			botPermissions: ['Speak', 'SendMessages'],
 			memberPermissions: ['Speak', 'UseApplicationCommands'],
 			enabled: true,
 			guildOnly: true,
 			options: [
 				{
-					name: 'recherche',
-					description: 'Donnez un titre ou un lien.',
+					name: 'search',
+					description: 'Search a title or url.',
 					type: ApplicationCommandOptionType.String,
 					autocomplete: true,
 					required: true
@@ -25,7 +25,7 @@ export default class PlayCommand extends BaseCommand {
 	}
 
 	async run ({ interaction }: CommandData): Promise<void> {
-		const query = interaction.options.getString('recherche', true);
+		const query = interaction.options.getString('search', true);
 
 		const { loadType, tracks, playlistInfo } = await this.client.manager.search(query);
 
@@ -35,7 +35,7 @@ export default class PlayCommand extends BaseCommand {
 			interaction.reply({
 				embeds: [{
 					title: 'Erreur',
-					description: `Aucun résultats pour: ${query}`
+					description: `No results for: ${query}`
 				}]
 			});
 			break;
@@ -74,10 +74,10 @@ export default class PlayCommand extends BaseCommand {
 
 			interaction.reply({
 				embeds: [{
-					title: 'Nouvelle musique',
+					title: 'Track added',
 					fields: [
 						{
-							name: 'Auteur',
+							name: 'Author',
 							value: track.author,
 						},
 						{
@@ -85,7 +85,14 @@ export default class PlayCommand extends BaseCommand {
 							value: track.source
 						}
 					]
-				}]
+				}],
+				fetchReply: true
+			}).then((msg) => {
+				setTimeout(() => {
+					if(msg.deletable) {
+						msg.delete();
+					}
+				}, 6000);
 			});
 
 			break;
@@ -127,14 +134,14 @@ export default class PlayCommand extends BaseCommand {
 			interaction.reply({
 				embeds: [
 					{
-						title: 'Nouvelle playlist',
+						title: 'New playlist',
 						fields: [
 							{
-								name: 'Titre',
+								name: 'Title',
 								value: playlistInfo.name,
 							},
 							{
-								name: 'Musiques',
+								name: 'Tracks',
 								value: tracks.length.toString(),
 							},
 						],

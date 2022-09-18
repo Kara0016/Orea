@@ -6,7 +6,7 @@ export default class StopCommand extends BaseCommand {
 	constructor (client: ExtendedClient) {
 		super(client, {
 			filename: __filename,
-			description: 'Permet de stopper la musique sur le serveur.',
+			description: 'Destroy the current player.',
 			enabled: true,
 			guildOnly: true,
 			botPermissions: ['Speak', 'SendMessages'],
@@ -15,27 +15,17 @@ export default class StopCommand extends BaseCommand {
 	}
 
 	async run ({ interaction, player }: CommandData): Promise<void> {
-		if(!player) {
-			interaction.reply({
-				embeds: [{
-					title: 'Erreur',
-					description: 'Il n\'y a aucune musique en cours sur ce serveur.'
-				}]
-			});
-			return;
-		}
-
 		try {
-			await player.destroy();
+			await player?.destroy();
 			interaction.reply({
 				embeds: [{
-					description: 'Le lecteur a été détruit.'
+					description: 'The player has been destroyed.'
 				}]
 			});
 		} catch (err) {
 			interaction.reply({
 				embeds: [{
-					description: 'Une erreur est survenue. Veuillez réessayer.'
+					description: 'An error occured. Please retry.'
 				}]
 			});
 		}

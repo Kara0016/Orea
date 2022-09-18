@@ -22,18 +22,10 @@ export default class SkipCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if(!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
 
 		const amount = interaction.options.getNumber('to', false) || 1;
 
-		player.skip(amount);
+		player?.skip(amount);
 
 		interaction.reply({
 			embeds: [{

@@ -36,32 +36,24 @@ export default class LoopCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if (!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
 
 		const loopMode = interaction.options.getString('mode', true);
 
 		switch(loopMode) {
 
 		case 'track':
-			player.setQueueLoop(false);
-			player.setTrackLoop(true);
+			player?.setQueueLoop(false);
+			player?.setTrackLoop(true);
 			break;
 
 		case 'queue':
-			player.setTrackLoop(false);
-			player.setQueueLoop(true);
+			player?.setTrackLoop(false);
+			player?.setQueueLoop(true);
 			break;
 
 		case 'off':
-			player.setTrackLoop(false);
-			player.setQueueLoop(false);
+			player?.setTrackLoop(false);
+			player?.setQueueLoop(false);
 			break;
 		}
 

@@ -23,19 +23,10 @@ export default class QueueCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if (!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
-
 		let pageOptions = interaction.options.getNumber('page') || 0;
 
 		let index = 0;
-		const chunckedTracks = this.chunkArray((player.queue as DefaultQueue).tracks, 20).map((track) => {
+		const chunckedTracks = this.chunkArray((player?.queue as DefaultQueue).tracks, 20).map((track) => {
 			return {
 				author: {
 					name: `${interaction.guild?.name} queue`,
@@ -46,7 +37,7 @@ export default class QueueCommand extends BaseCommand {
 				}).join('\n') : `Queue is empty. Use </play:${this.client.user?.id}> command to add a track.`,
 				fields: [{
 					name: 'Current',
-					value: `${player.current?.title} - ${player.current?.author}`
+					value: `${player?.current?.title} - ${player?.current?.author}`
 				}],
 				footer: {
 					text: `Page: ${Math.round(index / 20)}`,
@@ -65,7 +56,7 @@ export default class QueueCommand extends BaseCommand {
 				description: `Queue is empty. Use </play:${this.client.user?.id}> command to add a track.`,
 				fields: [{
 					name: 'Current',
-					value: `${player.current?.title} - ${player.current?.author}`
+					value: `${player?.current?.title} - ${player?.current?.author}`
 				}],
 				footer: {
 					text: 'Page: 1/1',

@@ -31,17 +31,9 @@ export default class CurrentCommand extends BaseCommand {
 	}
 
 	run ({ interaction, player }: CommandData): void {
-		if (!player) {
-			interaction.reply({
-				embeds: [{
-					description: '❌ | **Nothing is playing right now...**'
-				}]
-			});
-			return;
-		}
-
 		const isPrivate = interaction.options.getString('private', false);
-		const { current } = player;
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const { current } = player!;
 
 		interaction.reply({
 			embeds: [{
