@@ -12,7 +12,7 @@ export default class ExtendedManager extends Vulkava {
 		 * @super {VulkavaOptions} options
 		 * @param {NodeOptions[]} options.nodes
 		 * @param {Function} options.sendWs
-		 * @param {string} defaultSearchSource
+		 * @param {string} options.defaultSearchSource
 		 * @param {SpotifyConfig} options.spotify
 		 */
 
